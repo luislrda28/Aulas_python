@@ -7,17 +7,43 @@ class Animal:
 
 
 class Ave(Animal):
-    def __init__(self, nro_patas):
-        super().__init__(nro_patas)
+    def __init__(self, cor_bico, **kw):
+        self.cor_bico = cor_bico
+        super().__init__(**kw)
+
+    def __str__(self):
+        return 'Ave'
 
 class Mamifero(Animal):
-    def __init__(self, nro_patas, cor_pelo):
+    def __init__(self, cor_pelo, **kw):
         self.cor_pelo = cor_pelo
-        super().__init__(nro_patas)
+        super().__init__(**kw)
 
+    def __str__(self):
+        return 'Mamifero'
 
-class gato(Mamifero, Animal):
+class gato(Mamifero):
     pass
 
-gato = gato(4)
-print(gato)
+class FalarMixin:
+    def falar(self):
+        print("oi estou falando")
+
+
+
+class ornitorrinco(Mamifero, Ave, FalarMixin):
+    def __init__(self, cor_bico, cor_pelo, nro_patas):
+        # print(ornitorrinco.__mro__)
+        print(ornitorrinco.mro())
+
+        super().__init__(cor_bico=cor_bico, cor_pelo=cor_pelo, nro_patas=nro_patas)
+
+    def __str__(self):
+        return 'Ornitorrinco'
+
+
+# gato = gato(nro_patas=4, cor_pelo='Vermelho')
+# print(gato)
+
+ornitorrinco1 = ornitorrinco(nro_patas=4, cor_pelo='Cinza', cor_bico="Laranja")
+print(ornitorrinco1)
