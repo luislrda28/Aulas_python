@@ -1,16 +1,23 @@
 class Animal:
-    def __init__(self, raça, cor, nome):
-        self.raça = raça
-        self.cor = cor
-        self.nome = nome
+    def __init__(self, nro_patas):
+        self.nm_patas = nro_patas
+
+    def __str__(self):
+        return f"{self.__class__.__name__}: {[f'{chave}={valor}' for chave, valor in self.__dict__.items()]}"
+
+
+class Ave(Animal):
+    def __init__(self, nro_patas):
+        super().__init__(nro_patas)
 
 class Mamifero(Animal):
-    def __init__(self, raça, cor, nome, numero_de_mamas):
-        self.numero_de_mamas = numero_de_mamas
-        super().__init__(raça, cor, nome)
+    def __init__(self, nro_patas, cor_pelo):
+        self.cor_pelo = cor_pelo
+        super().__init__(nro_patas)
 
-class cachorro(Mamifero, Animal):
-    def __init__(self, raça, cor, nome, numero_de_mamas, numero_de_patas):
-        self.numero_de_patas = numero_de_patas
-        super().__init__(raça, cor, nome, numero_de_mamas)
-        
+
+class gato(Mamifero, Animal):
+    pass
+
+gato = gato(4)
+print(gato)
